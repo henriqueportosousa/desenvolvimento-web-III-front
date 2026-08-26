@@ -1,38 +1,46 @@
 .aplicacao {
   min-height: 100vh;
 }
+
 .cabecalho {
   background-color: #0b5dc9;
   color: #ffffff;
 }
+
 .cabecalho-conteudo {
   max-width: 1200px;
   margin: 0 auto;
   padding: 32px 24px;
 }
+
 .cabecalho h1 {
   margin: 0 0 8px;
   font-size: 2.2rem;
 }
+
 .cabecalho p {
   margin: 0;
   font-size: 1.1rem;
 }
+
 .conteudo-principal {
   max-width: 1200px;
   margin: 0 auto;
   padding: 32px 24px;
 }
+
 .introducao {
   margin: 0 0 32px;
   font-size: 1.1rem;
   line-height: 1.6;
 }
+
 .modulos {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
+
 .card-modulo {
   padding: 24px;
   background-color: #ffffff;
@@ -43,20 +51,42 @@
     transform 0.2s,
     box-shadow 0.2s;
 }
+
 .card-modulo:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 18px rgb(0 0 0 / 15%);
 }
+
 .card-modulo h2 {
   margin: 0 0 12px;
   color: #0b5dc9;
   font-size: 1.4rem;
 }
+
 .card-modulo p {
   margin: 0;
   line-height: 1.5;
   color: #4b5563;
 }
+
+.botao-alternar {
+  margin: 0 0 24px;
+  padding: 10px 18px;
+  background-color: #0b5dc9;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.botao-alternar:hover {
+  background-color: #0b5dc9;
+  transform: scale(1.05);
+  box-shadow: 0 8px 18px rgb(0 0 0 / 15%);
+}
+
 @media (max-width: 768px) {
   .cabecalho h1 {
     font-size: 1.8rem;
