@@ -21,9 +21,9 @@ function CadastroCliente() {
     }
 
     return (
-        <main className="pagina-clientes">
+        <main className="pagina">
             <h1>Cadastrar novo cliente</h1>
-            <form className="formulario-cliente"
+            <form className="formulario"
                 onSubmit={cadastrarCliente}>
                 <label htmlFor="nome">Nome</label>
                 <input
