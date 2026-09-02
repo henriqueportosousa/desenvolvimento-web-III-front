@@ -10,6 +10,11 @@ import Clientes from './pages/Clientes/Clientes';
 import ListaClientes from "./pages/Clientes/ListaClientes";
 import CadastroCliente from "./pages/Clientes/CadastroClientes";
 
+import Funcionarios from "./pages/Funcionarios/Funcionaris";
+import ListaFuncionarios from "./pages/Funcionarios/ListaFuncionarios";
+import CadastroFuncionario from "./pages/Funcionarios/CadastroFuncionarios";
+
+
 function App() {
   const [mostrarModulos, setMostrarModulos] = useState(true);
 
@@ -32,6 +37,7 @@ function App() {
       id: 3,
       titulo: "Gerenciamento de Funcionários",
       descricao: "Cadastre e consulte os funcionários da empresa.",
+      rota: '/funcionarios'
     },
     {
       id: 4,
@@ -79,18 +85,41 @@ function App() {
           </div>
         }
       />
+
+      {/* Clientes */}
       <Route
         path="/clientes"
         element={<Clientes />}
       />
+
       <Route
         path="/clientes/listar"
         element={<ListaClientes />}
       />
+
       <Route
         path="/clientes/cadastrar"
         element={<CadastroCliente />}
       />
+
+      {/* Funcionarios */}
+
+      <Route
+        path="/funcionarios"
+        element={<Funcionarios />}
+      />
+
+      <Route
+        path="/funcionarios/listar"
+        element={<ListaFuncionarios />}
+      />
+      
+      <Route
+        path="/funcionarios/cadastrar"
+        element={<CadastroFuncionario />}
+      />
+
+
     </Routes>
   );
 }
