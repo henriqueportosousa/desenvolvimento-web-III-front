@@ -1,9 +1,14 @@
 import "./App.css";
 
 import { useState } from "react";
+import { Routes, Route } from 'react-router'
 
 import Cabecalho from "./components/Cabecalho";
 import CardModulo from "./components/CardModulo";
+
+import Clientes from './pages/Clientes/Clientes';
+import ListaClientes from "./pages/Clientes/ListaClientes";
+import CadastroCliente from "./pages/Clientes/CadastroClientes";
 
 function App() {
   const [mostrarModulos, setMostrarModulos] = useState(true);
@@ -11,7 +16,7 @@ function App() {
   // const [titulo, setTitulo] = useState('');
   // const [descricao, setDescricao] = useState('');
 
-  const [modulos] = useState([
+  const [modulos, setModulos] = useState([
     {
       id: 1,
       titulo: "Gerenciamento de Produtos",
@@ -21,6 +26,7 @@ function App() {
       id: 2,
       titulo: "Gerenciamento de Clientes",
       descricao: "Cadastre e consulte os clientes da empresa.",
+      rota: '/clientes',
     },
     {
       id: 3,
@@ -35,37 +41,57 @@ function App() {
   ]);
 
   return (
-    <div className="aplicacao">
-      <Cabecalho />
-      <main className="conteudo-principal">
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <div className="aplicacao">
+            <Cabecalho />
+            <main className="conteudo-principal">
 
-        <p className="introducao">
-          Aplicação desenvolvida nas disciplinas de Desenvolvimento Web III e
-          Tópicos de Programação II.
-        </p>
+              <p className="introducao">
+                Aplicação desenvolvida nas disciplinas de Desenvolvimento Web III e
+                Tópicos de Programação II.
+              </p>
 
-        <button
-          type="button"
-          className="botao-alternar"
-          onClick={() => setMostrarModulos(!mostrarModulos)}
-        >
-          {mostrarModulos ? "Ocultar módulos" : "Exibir módulos"}
-        </button>
+              <button
+                type="button"
+                className="botao-alternar"
+                onClick={() => setMostrarModulos(!mostrarModulos)}
+              >
+                {mostrarModulos ? "Ocultar módulos" : "Exibir módulos"}
+              </button>
 
 
-        {mostrarModulos && (
-          <section className="modulos">
-            {modulos.map((modulo) => (
-              <CardModulo
-                key={modulo.id}
-                titulo={modulo.titulo}
-                descricao={modulo.descricao}
-              />
-            ))}
-          </section>
-        )}
-      </main>
-    </div>
+              {mostrarModulos && (
+                <section className="modulos">
+                  {modulos.map((modulo) => (
+                    <CardModulo
+                      key={modulo.id}
+                      titulo={modulo.titulo}
+                      descricao={modulo.descricao}
+                      rota={modulo.rota}
+                    />
+                  ))}
+                </section>
+              )}
+            </main>
+          </div>
+        }
+      />
+      <Route
+        path="/clientes"
+        element={<Clientes />}
+      />
+      <Route
+        path="/clientes/listar"
+        element={<ListaClientes />}
+      />
+      <Route
+        path="/clientes/cadastrar"
+        element={<CadastroCliente />}
+      />
+    </Routes>
   );
 }
 export default App;
