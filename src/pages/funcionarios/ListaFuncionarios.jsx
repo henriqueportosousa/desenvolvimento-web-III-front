@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { formatarDataBrasileira } from "../../utils/formatadores";
 
 function ListaFuncionarios({ funcionarios, aoExcluir }) {
 
@@ -12,14 +13,6 @@ function ListaFuncionarios({ funcionarios, aoExcluir }) {
         }
     }
 
-    function formatarData(data) {
-        if (!data) return '';
-
-        const [ano, mes, dia] = data.split('-');
-        return `${dia}/${mes}/${ano}`;
-    }
-
-
     return (
         <main className="pagina">
             <h1>Lista de Funcionarios</h1>
@@ -30,7 +23,7 @@ function ListaFuncionarios({ funcionarios, aoExcluir }) {
                         <span>CPF: {funcionario.cpf}</span>
                         <span>E-mail: {funcionario.email}</span>
                         <span>Telefone: {funcionario.telefone}</span>
-                        <span>Data de Nascimento: {formatarData(funcionario.dataNascimento)}</span>
+                        <span>Data de Nascimento: {formatarDataBrasileira(funcionario.dataNascimento)}</span>
                         <span>Cargo: {funcionario.cargo}</span>
                         <span>Salario: {funcionario.salario}</span>
                         <span>Departamento: {funcionario.departamento}</span>

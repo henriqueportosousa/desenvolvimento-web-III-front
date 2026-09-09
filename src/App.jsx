@@ -82,7 +82,7 @@ function App() {
   }
 
 
-  const [modulos, setModulos] = useState([
+  const [modulos] = useState([
     {
       id: 1,
       titulo: "Gerenciamento de Produtos",
