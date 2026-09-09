@@ -1,25 +1,55 @@
 import "./App.css";
 
-import { useState } from "react";
-import { Routes, Route } from 'react-router'
+import { useState } from "react";;
+import { Routes, Route } from 'react-router';
 
 import Cabecalho from "./components/Cabecalho";
 import CardModulo from "./components/CardModulo";
 
-import Clientes from './pages/Clientes/Clientes';
-import ListaClientes from "./pages/Clientes/ListaClientes";
-import CadastroCliente from "./pages/Clientes/CadastroClientes";
+import Clientes from './pages/clientes/Clientes';
+import ListaClientes from "./pages/clientes/ListaClientes";
+import CadastroClientes from "./pages/clientes/CadastroClientes";
+import EditarClientes from "./pages/clientes/EditarClientes";
+import clientesInicias from './data/clientes';
 
-import Funcionarios from "./pages/Funcionarios/Funcionaris";
-import ListaFuncionarios from "./pages/Funcionarios/ListaFuncionarios";
-import CadastroFuncionario from "./pages/Funcionarios/CadastroFuncionarios";
+import Funcionarios from "./pages/funcionarios/Funcionaris";
+import ListaFuncionarios from "./pages/funcionarios/ListaFuncionarios";
+import CadastroFuncionarios from "./pages/funcionarios/CadastroFuncionarios";
 
 
 function App() {
   const [mostrarModulos, setMostrarModulos] = useState(true);
+  const [clientes, setClientes] = useState(clientesInicias);
 
   // const [titulo, setTitulo] = useState('');
   // const [descricao, setDescricao] = useState('');
+
+  function adicionarCliente(novoCliente) {
+    const clienteComId = {
+      id: Date.now(),
+      ...novoCliente,
+    }
+    setClientes((listaAtual) => [
+      ...listaAtual,
+      clienteComId,
+    ])
+  }
+
+  function exluirCliente(id) {
+    setClientes((listaAtual) =>
+      listaAtual.filter((cliente) => cliente.id !== id)
+    );
+  }
+
+  function alterarCliente(clienteAtualizado) {
+    setClientes((listaAtual) =>
+      listaAtual.map((cliente) =>
+        cliente.id === clienteAtualizado.id
+          ? clienteAtualizado
+          : cliente
+      )
+    );
+  }
 
   const [modulos, setModulos] = useState([
     {
@@ -94,12 +124,27 @@ function App() {
 
       <Route
         path="/clientes/listar"
-        element={<ListaClientes />}
+        element={
+          <ListaClientes
+            clientes={clientes}
+            aoExcluir={exluirCliente}
+          />
+        }
       />
 
       <Route
         path="/clientes/cadastrar"
-        element={<CadastroCliente />}
+        element={<CadastroClientes aoCadastrar={adicionarCliente} />}
+      />
+
+      <Route
+        path="/clientes/editar/:id"
+        element={
+          <EditarClientes
+            clientes={clientes}
+            aoAlterar={alterarCliente}
+          />
+        }
       />
 
       {/* Funcionarios */}
@@ -113,10 +158,10 @@ function App() {
         path="/funcionarios/listar"
         element={<ListaFuncionarios />}
       />
-      
+
       <Route
         path="/funcionarios/cadastrar"
-        element={<CadastroFuncionario />}
+        element={<CadastroFuncionarios />}
       />
 
 
