@@ -8,12 +8,13 @@ import CardModulo from "./components/CardModulo";
 
 import Clientes from './pages/clientes/Clientes';
 import ListaClientes from "./pages/clientes/ListaClientes";
-import CadastroCliente from "./pages/clientes/CadastroClientes";
+import CadastroClientes from "./pages/clientes/CadastroClientes";
+import EditarClientes from "./pages/clientes/EditarClientes";
 import clientesInicias from './data/clientes';
 
 import Funcionarios from "./pages/funcionarios/Funcionaris";
 import ListaFuncionarios from "./pages/funcionarios/ListaFuncionarios";
-import CadastroFuncionario from "./pages/funcionarios/CadastroFuncionarios";
+import CadastroFuncionarios from "./pages/funcionarios/CadastroFuncionarios";
 
 
 function App() {
@@ -32,6 +33,22 @@ function App() {
       ...listaAtual,
       clienteComId,
     ])
+  }
+
+  function exluirCliente(id) {
+    setClientes((listaAtual) =>
+      listaAtual.filter((cliente) => cliente.id !== id)
+    );
+  }
+
+  function alterarCliente(clienteAtualizado) {
+    setClientes((listaAtual) =>
+      listaAtual.map((cliente) =>
+        cliente.id === clienteAtualizado.id
+          ? clienteAtualizado
+          : cliente
+      )
+    );
   }
 
   const [modulos, setModulos] = useState([
@@ -107,12 +124,27 @@ function App() {
 
       <Route
         path="/clientes/listar"
-        element={<ListaClientes clientes={clientes} />}
+        element={
+          <ListaClientes
+            clientes={clientes}
+            aoExcluir={exluirCliente}
+          />
+        }
       />
 
       <Route
         path="/clientes/cadastrar"
-        element={<CadastroCliente aoCadastrar={adicionarCliente} />}
+        element={<CadastroClientes aoCadastrar={adicionarCliente} />}
+      />
+
+      <Route
+        path="/clientes/editar/:id"
+        element={
+          <EditarClientes
+            clientes={clientes}
+            aoAlterar={alterarCliente}
+          />
+        }
       />
 
       {/* Funcionarios */}
@@ -129,7 +161,7 @@ function App() {
 
       <Route
         path="/funcionarios/cadastrar"
-        element={<CadastroFuncionario />}
+        element={<CadastroFuncionarios />}
       />
 
 

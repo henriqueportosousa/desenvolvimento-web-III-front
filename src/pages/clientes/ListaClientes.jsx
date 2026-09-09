@@ -1,6 +1,18 @@
 import { Link } from "react-router";
 
-function ListaClientes({clientes}) {
+function ListaClientes({ clientes, aoExcluir }) {
+
+    function confirmarExclusao(cliente) {
+        const confirmacao = window.confirm(
+            `Deseja realmente excluir o cliente ${cliente.nome}?`
+        )
+
+        if (confirmacao) {
+            aoExcluir(cliente.id);
+        }
+    }
+
+
     return (
         <main className="pagina">
             <h1>Lista de Clientes</h1>
@@ -11,9 +23,16 @@ function ListaClientes({clientes}) {
                         <span>CPF: {cliente.cpf}</span>
                         <span>E-mail: {cliente.email}</span>
                         <span>Telefone: {cliente.telefone}</span>
+
+                        <div className="acoes">
+                            <Link to={`/clientes/editar/${cliente.id}`} className="botao-alterar">Alterar</Link>
+                            <button onClick={() => confirmarExclusao(cliente)} className="botao-excluir">Excluir</button>
+                        </div>
+                        
                     </li>
                 ))}
             </ul>
+            
             <Link to="/clientes">Voltar para Gerenciamento de
                 Clientes</Link>
         </main>
