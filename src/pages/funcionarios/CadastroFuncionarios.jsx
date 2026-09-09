@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { NumericFormat } from "react-number-format";
 import { IMaskInput } from "react-imask";
-
-
 
 function CadastroFuncionario() {
     const [nome, setNome] = useState("");

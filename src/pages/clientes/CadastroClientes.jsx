@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { IMaskInput } from "react-imask";
 
-function CadastroCliente() {
+function CadastroCliente({ aoCadastrar }) {
     const [nome, setNome] = useState('')
     const [cpf, setCpf] = useState('')
     const [telefone, setTelefone] = useState('')
@@ -16,8 +17,15 @@ function CadastroCliente() {
             telefone,
             email
         }
-        console.log(novoCliente)
+        
+        aoCadastrar(novoCliente)
+
         alert('Cliente cadastrado com sucesso!')
+        
+        setNome('')
+        setCpf('')
+        setTelefone('')
+        setEmail('')
     }
 
     return (
@@ -25,6 +33,7 @@ function CadastroCliente() {
             <h1>Cadastrar novo cliente</h1>
             <form className="formulario"
                 onSubmit={cadastrarCliente}>
+
                 <label htmlFor="nome">Nome</label>
                 <input
                     id="nome"
@@ -32,27 +41,30 @@ function CadastroCliente() {
                     value={nome}
                     onChange={(evento) =>
                         setNome(evento.target.value)}
+                    placeholder="Digite o nome completo"
                     required
                 />
-                <label htmlFor="cpf">CPF</label>
-                <input
+
+                <label htmlFor="CPF">CPF</label>
+                <IMaskInput
                     id="cpf"
-                    type="text"
+                    mask="000.000.000-00"
                     value={cpf}
-                    onChange={(evento) =>
-                        setCpf(evento.target.value)}
-                    maxLength="11"
+                    onAccept={(valor) => setCpf(valor)}
+                    placeholder="000.000.000-00"
                     required
                 />
 
                 <label htmlFor="telefone">Telefone</label>
-                <input
+                <IMaskInput
                     id="telefone"
-                    type="text"
+                    mask="(00) 00000-0000"
                     value={telefone}
-                    onChange={(evento) =>
-                        setTelefone(evento.target.value)}
+                    onAccept={(valor) => setTelefone(valor)}
+                    placeholder="(11) 99999-9999"
+                    required
                 />
+
                 <label htmlFor="email">E-mail</label>
                 <input
                     id="email"
@@ -60,7 +72,10 @@ function CadastroCliente() {
                     value={email}
                     onChange={(evento) =>
                         setEmail(evento.target.value)}
+                    placeholder="funcionario@email.com"
+                    required
                 />
+
                 <button type="submit">Cadastrar cliente</button>
             </form>
             <Link to="/clientes">Voltar para Gerenciamento de

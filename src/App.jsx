@@ -1,25 +1,38 @@
 import "./App.css";
 
-import { useState } from "react";
-import { Routes, Route } from 'react-router'
+import { useState } from "react";;
+import { Routes, Route } from 'react-router';
 
 import Cabecalho from "./components/Cabecalho";
 import CardModulo from "./components/CardModulo";
 
-import Clientes from './pages/Clientes/Clientes';
-import ListaClientes from "./pages/Clientes/ListaClientes";
-import CadastroCliente from "./pages/Clientes/CadastroClientes";
+import Clientes from './pages/clientes/Clientes';
+import ListaClientes from "./pages/clientes/ListaClientes";
+import CadastroCliente from "./pages/clientes/CadastroClientes";
+import clientesInicias from './data/clientes';
 
-import Funcionarios from "./pages/Funcionarios/Funcionaris";
-import ListaFuncionarios from "./pages/Funcionarios/ListaFuncionarios";
-import CadastroFuncionario from "./pages/Funcionarios/CadastroFuncionarios";
+import Funcionarios from "./pages/funcionarios/Funcionaris";
+import ListaFuncionarios from "./pages/funcionarios/ListaFuncionarios";
+import CadastroFuncionario from "./pages/funcionarios/CadastroFuncionarios";
 
 
 function App() {
   const [mostrarModulos, setMostrarModulos] = useState(true);
+  const [clientes, setClientes] = useState(clientesInicias);
 
   // const [titulo, setTitulo] = useState('');
   // const [descricao, setDescricao] = useState('');
+
+  function adicionarCliente(novoCliente) {
+    const clienteComId = {
+      id: Date.now(),
+      ...novoCliente,
+    }
+    setClientes((listaAtual) => [
+      ...listaAtual,
+      clienteComId,
+    ])
+  }
 
   const [modulos, setModulos] = useState([
     {
@@ -94,12 +107,12 @@ function App() {
 
       <Route
         path="/clientes/listar"
-        element={<ListaClientes />}
+        element={<ListaClientes clientes={clientes} />}
       />
 
       <Route
         path="/clientes/cadastrar"
-        element={<CadastroCliente />}
+        element={<CadastroCliente aoCadastrar={adicionarCliente} />}
       />
 
       {/* Funcionarios */}
@@ -113,7 +126,7 @@ function App() {
         path="/funcionarios/listar"
         element={<ListaFuncionarios />}
       />
-      
+
       <Route
         path="/funcionarios/cadastrar"
         element={<CadastroFuncionario />}

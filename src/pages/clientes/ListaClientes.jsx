@@ -1,29 +1,6 @@
 import { Link } from "react-router";
 
-function ListaClientes() {
-    const clientes = [
-        {
-            id: 1,
-            nome: 'Ana Souza',
-            cpf: '12345678901',
-            email: 'ana@email.com',
-            telefone: '(11) 97125-8231'
-        },
-        {
-            id: 2,
-            nome: 'Bruno Lima',
-            cpf: '23456789012',
-            email: 'bruno@email.com',
-            telefone: '(21) 91407-9021'
-        },
-        {
-            id: 3,
-            nome: 'Carla Mendes',
-            cpf: '34567890123',
-            email: 'carla@email.com',
-            telefone: '(17) 98281-3693'
-        },
-    ]
+function ListaClientes({clientes}) {
     return (
         <main className="pagina">
             <h1>Lista de Clientes</h1>
