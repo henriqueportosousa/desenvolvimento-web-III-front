@@ -1,61 +1,64 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { IMaskInput } from "react-imask";
 
-function CadastroFuncionario({ aoCadastrar }) {
-    const [nome, setNome] = useState("");
-    const [cpf, setCpf] = useState("");
-    const [email, setEmail] = useState("");
-    const [telefone, setTelefone] = useState("");
-    const [dataNascimento, setDataNascimento] = useState("");
-    const [cargo, setCargo] = useState("");
-    const [salario, setSalario] = useState("");
-    const [departamento, setDepartamento] = useState("");
-    const [cidade, setCidade] = useState("");
-    const [status, setStatus] = useState("Ativo");
+function EditarFuncionarios({ funcionarios, aoAlterar }) {
+    const { id } = useParams();
     const navegar = useNavigate();
 
-    function cadastrarFuncionario(evento) {
-        evento.preventDefault();
+    const funcionarioEncontrado = funcionarios.find(
+        (funcionario) => funcionario.id === Number(id)
+    );
 
-        const novoFuncionario = {
-            id,
+    const [nome, setNome] = useState(funcionarioEncontrado?.nome ?? '');
+    const [cpf, setCpf] = useState(funcionarioEncontrado?.cpf ?? '');
+    const [email, setEmail] = useState(funcionarioEncontrado?.email ?? '');
+    const [telefone, setTelefone] = useState(funcionarioEncontrado?.telefone ?? '');
+    const [dataNascimento, setDataNascimento] = useState(funcionarioEncontrado?.dataNascimento ?? '');
+    const [cargo, setCargo] = useState(funcionarioEncontrado?.cargo ?? '');
+    const [salario, setSalario] = useState(
+        funcionarioEncontrado?.salario?.toString() ?? ''
+    );
+    const [departamento, setDepartamento] = useState(funcionarioEncontrado?.departamento ?? '');
+    const [cidade, setCidade] = useState(funcionarioEncontrado?.cidade ?? '');
+    const [status, setStatus] = useState(funcionarioEncontrado?.status ?? 'Ativo');
+
+    function alterarFuncionario(evento) {
+        evento.preventDefault();
+        const funcionarioAtualizado = {
+            id: Number(id),
             nome,
             cpf,
             email,
             telefone,
             dataNascimento,
             cargo,
-            salario: Number(salario),
+            salario,
             departamento,
             cidade,
             status
         };
-
-        aoCadastrar(novoFuncionario)
-
-        alert("Funcionário cadastrado com sucesso!");
-
-        setNome("");
-        setCpf("");
-        setEmail("");
-        setTelefone("");
-        setDataNascimento("");
-        setCargo("");
-        setSalario("");
-        setDepartamento("");
-        setCidade("");
-        setStatus("Ativo");
-
+        aoAlterar(funcionarioAtualizado)
+        alert('Funcionario alterado com sucesso!');
         navegar('/funcionarios/listar');
+    }
+
+
+    if (!funcionarioEncontrado) {
+        return (
+            <main className="pagina">
+                <h1>Funcionario não encontrado</h1>
+                <Link to="/funcionarios/listar">Voltar para Lista de Funcionarios</Link>
+            </main>
+        );
     }
 
     return (
         <main className="pagina">
-            <h1>Cadastrar novo funcionário</h1>
+            <h1>Alterar funcionário</h1>
             <form
                 className="formulario"
-                onSubmit={cadastrarFuncionario}
+                onSubmit={alterarFuncionario}
             >
 
                 <label htmlFor="nome">Nome</label>
@@ -208,17 +211,15 @@ function CadastroFuncionario({ aoCadastrar }) {
                 </select>
 
                 <button type="submit">
-                    Cadastrar funcionário
+                    Alterar funcionário
                 </button>
 
             </form>
-
-            <Link to="/funcionarios">
-                Voltar para Gerenciamento de Funcionários
+            <Link to="/funcionarios/listar">
+                Voltar para a lista de funcionarios
             </Link>
-
         </main>
     );
 }
 
-export default CadastroFuncionario;
+export default EditarFuncionarios

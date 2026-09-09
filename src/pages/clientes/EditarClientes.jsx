@@ -5,6 +5,7 @@ import { IMaskInput } from "react-imask";
 function EditarClientes({ clientes, aoAlterar }) {
     const { id } = useParams();
     const navegar = useNavigate();
+    
     const clienteEncontrado = clientes.find(
         (cliente) => cliente.id === Number(id)
     );
@@ -16,6 +17,7 @@ function EditarClientes({ clientes, aoAlterar }) {
 
     function alterarCliente(evento) {
         evento.preventDefault();
+        
         const clienteAtualizado = {
             id: Number(id),
             nome,
