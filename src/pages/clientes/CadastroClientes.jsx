@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { IMaskInput } from "react-imask";
 
 function CadastroCliente({ aoCadastrar }) {
@@ -7,6 +7,7 @@ function CadastroCliente({ aoCadastrar }) {
     const [cpf, setCpf] = useState('')
     const [telefone, setTelefone] = useState('')
     const [email, setEmail] = useState('')
+    const navegar = useNavigate();
 
     function cadastrarCliente(evento) {
         evento.preventDefault()
@@ -17,15 +18,18 @@ function CadastroCliente({ aoCadastrar }) {
             telefone,
             email
         }
-        
+
         aoCadastrar(novoCliente)
 
         alert('Cliente cadastrado com sucesso!')
-        
+
         setNome('')
         setCpf('')
         setTelefone('')
         setEmail('')
+
+        navegar('/clientes/listar');
+
     }
 
     return (

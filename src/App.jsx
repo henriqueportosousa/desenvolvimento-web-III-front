@@ -12,14 +12,17 @@ import CadastroClientes from "./pages/clientes/CadastroClientes";
 import EditarClientes from "./pages/clientes/EditarClientes";
 import clientesInicias from './data/clientes';
 
-import Funcionarios from "./pages/funcionarios/Funcionaris";
+import Funcionarios from "./pages/funcionarios/Funcionarios";
 import ListaFuncionarios from "./pages/funcionarios/ListaFuncionarios";
 import CadastroFuncionarios from "./pages/funcionarios/CadastroFuncionarios";
+import EditarFuncionarios from "./pages/funcionarios/EditarFuncionarios";
+import funcionariosInicias from './data/funcionarios';
 
 
 function App() {
   const [mostrarModulos, setMostrarModulos] = useState(true);
   const [clientes, setClientes] = useState(clientesInicias);
+  const [funcionarios, setFuncionarios] = useState(funcionariosInicias);
 
   // const [titulo, setTitulo] = useState('');
   // const [descricao, setDescricao] = useState('');
@@ -51,7 +54,35 @@ function App() {
     );
   }
 
-  const [modulos, setModulos] = useState([
+  function adicionarFuncionario(novoFuncionario) {
+    const funcionarioComId = {
+      id: Date.now(),
+      ...novoFuncionario
+    }
+    setFuncionarios((listaAtual) => [
+      ...listaAtual,
+      funcionarioComId
+    ])
+  }
+
+  function excluirFuncionario(id) {
+    setFuncionarios((listaAtual) =>
+      listaAtual.filter((funcionario) => funcionario.id !== id)
+    );
+  }
+
+  function alterarFuncionario(funcionarioAtualizado) {
+    setFuncionarios((listaAtual) =>
+      listaAtual.map((funcionario) =>
+        funcionario.id === funcionarioAtualizado.id
+          ? funcionarioAtualizado
+          : funcionario
+      )
+    );
+  }
+
+
+  const [modulos] = useState([
     {
       id: 1,
       titulo: "Gerenciamento de Produtos",
@@ -156,12 +187,27 @@ function App() {
 
       <Route
         path="/funcionarios/listar"
-        element={<ListaFuncionarios />}
+        element={
+          <ListaFuncionarios
+            funcionarios={funcionarios}
+            aoExcluir={excluirFuncionario}
+          />
+        }
       />
 
       <Route
         path="/funcionarios/cadastrar"
-        element={<CadastroFuncionarios />}
+        element={<CadastroFuncionarios aoCadastrar={adicionarFuncionario} />}
+      />
+
+      <Route
+        path="/funcionarios/editar/:id"
+        element={
+          <EditarFuncionarios
+            funcionarios={funcionarios}
+            aoAlterar={alterarFuncionario}
+          />
+        }
       />
 
 
