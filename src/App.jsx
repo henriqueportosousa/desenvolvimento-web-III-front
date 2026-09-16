@@ -146,7 +146,6 @@ function App() {
           </div>
         }
       />
-
       {/* Clientes */}
       <Route
         path="/clientes"
@@ -165,7 +164,12 @@ function App() {
 
       <Route
         path="/clientes/cadastrar"
-        element={<CadastroClientes aoCadastrar={adicionarCliente} />}
+        element={
+          <CadastroClientes
+            clientes={clientes}
+            aoCadastrar={adicionarCliente}
+          />
+        }
       />
 
       <Route
