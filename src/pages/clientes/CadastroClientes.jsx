@@ -15,7 +15,6 @@ function CadastroCliente({ clientes, aoCadastrar }) {
             ...errosAtuais,
             [campo]: '',
         }))
-        
     }
 
     function validarFormulario() {
