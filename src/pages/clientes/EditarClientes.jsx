@@ -6,7 +6,6 @@ function EditarClientes({ clientes, aoAlterar }) {
     const { id } = useParams();
     const navegar = useNavigate();
 
-    // Converte ambos para Number para garantir que encontre o cliente corretamente
     const clienteEncontrado = clientes.find(
         (cliente) => Number(cliente.id) === Number(id)
     );
