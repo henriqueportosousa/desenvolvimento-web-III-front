@@ -1,15 +1,16 @@
 export const FUNCIONARIO_INICIAL = {
+  id_funcionario: "",
   nome: "",
   cpf: "",
-  email: "",
-  telefone: "",
-  dataNascimento: "",
   cargo: "",
   salario: "",
-  departamento: "",
-  cidade: "",
+  data_admissao: "",
+  email: "",
+  login: "",
+  senha_hash: "",
+  perfil: "",
   status: "Ativo",
 };
 
-export const DEPARTAMENTOS = ["Recursos Humanos", "Tecnologia", "Financeiro", "Administrativo", "Comercial", "Marketing", "Design"];
-export const STATUS_FUNCIONARIO = ["Ativo", "Férias", "Afastado"];
+export const PERFIL = ["ADMIN", "GERENTE", "OPERADOR"];
+export const STATUS_FUNCIONARIO = ["Ativo", "Inativo"];

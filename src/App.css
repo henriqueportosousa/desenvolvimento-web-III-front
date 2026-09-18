@@ -251,6 +251,44 @@
   -moz-appearance: textfield;
 }
 
+.campo-senha {
+  position: relative;
+}
+
+.campo-senha input {
+  box-sizing: border-box;
+  width: 100%;
+  padding-right: 48px;
+}
+
+.formulario .botao-mostrar-senha {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  margin: 0;
+  padding: 6px 10px;
+  transform: translateY(-50%);
+  background: transparent;
+  color: #0a749e;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.formulario .botao-mostrar-senha:hover {
+  background: #eff6ff;
+}
+
+.botao-mostrar-senha svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
 .formulario button {
   align-self: flex-start;
   margin-top: 16px;
@@ -344,6 +382,10 @@
   font-weight: 500;
 }
 .formulario input.campo-invalido {
+  border-color: #dc2626;
+  outline-color: #fecaca;
+}
+.formulario select.campo-invalido {
   border-color: #dc2626;
   outline-color: #fecaca;
 }

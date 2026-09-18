@@ -3,14 +3,14 @@ import { Link } from "react-router";
 function Funcionarios() {
     return (
         <div className="pagina">
-            <h1>Gerenciamento de Funcionario</h1>
+            <h1>Gerenciamento de Funcionários</h1>
             <p>Escolha uma das opções:</p>
             <div className="opcoes">
                 <Link to="/funcionarios/listar">
-                    Listar funcionarios
+                    Listar funcionários
                 </Link>
                 <Link to="/funcionarios/cadastrar">
-                    Cadastrar novo funcionario
+                    Cadastrar novo funcionário
                 </Link>
             </div>
             <Link to="/">

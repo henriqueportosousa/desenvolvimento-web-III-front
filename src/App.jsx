@@ -24,9 +24,6 @@ function App() {
   const [clientes, setClientes] = useState(clientesInicias);
   const [funcionarios, setFuncionarios] = useState(funcionariosInicias);
 
-  // const [titulo, setTitulo] = useState('');
-  // const [descricao, setDescricao] = useState('');
-
   function adicionarCliente(novoCliente) {
     const clienteComId = {
       id: Date.now(),
@@ -56,8 +53,8 @@ function App() {
 
   function adicionarFuncionario(novoFuncionario) {
     const funcionarioComId = {
-      id: Date.now(),
-      ...novoFuncionario
+      ...novoFuncionario,
+      id_funcionario: Date.now(),
     }
     setFuncionarios((listaAtual) => [
       ...listaAtual,
@@ -67,14 +64,14 @@ function App() {
 
   function excluirFuncionario(id) {
     setFuncionarios((listaAtual) =>
-      listaAtual.filter((funcionario) => funcionario.id !== id)
+      listaAtual.filter((funcionario) => funcionario.id_funcionario !== id)
     );
   }
 
   function alterarFuncionario(funcionarioAtualizado) {
     setFuncionarios((listaAtual) =>
       listaAtual.map((funcionario) =>
-        funcionario.id === funcionarioAtualizado.id
+        funcionario.id_funcionario === funcionarioAtualizado.id_funcionario
           ? funcionarioAtualizado
           : funcionario
       )
@@ -201,7 +198,12 @@ function App() {
 
       <Route
         path="/funcionarios/cadastrar"
-        element={<CadastroFuncionarios aoCadastrar={adicionarFuncionario} />}
+        element={
+          <CadastroFuncionarios
+            funcionarios={funcionarios}
+            aoCadastrar={adicionarFuncionario}
+          />
+        }
       />
 
       <Route
